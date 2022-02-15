@@ -1,0 +1,13 @@
+[package]
+name = "yugabyte-simple-rust-app"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name="src"
+path="src/sample-app.rs"
+
+[dependencies]
+postgres = "0.19.2"
+openssl = "0.10.38"
+postgres-openssl = "0.5.0"
