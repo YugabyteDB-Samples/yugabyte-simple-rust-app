@@ -2,7 +2,7 @@
 
 This application connects to your YugabyteDB instance via the 
 [Rust](https://github.com/sfackler/rust-postgres) driver for PostgreSQL and performs basic SQL operations. The instructions below are provided for [Yugabyte Cloud](https://cloud.yugabyte.com/) deployments. 
-If you use a different type of deployment, then update the `sample-app.rs` file with proper connection parameters.
+If you use a different type of deployment, then update the `src/sample-app.rs` file with proper connection parameters.
 
 ## Prerequisite
 
@@ -25,7 +25,7 @@ git clone https://github.com/yugabyte/yugabyte-simple-rust-app && cd yugabyte-si
 
 ## Provide Yugabyte Cloud Connection Parameters
 
-Update the following connection parameters in the `sample-app.rs` file:
+Update the following connection parameters in the `src/sample-app.rs` file:
 * `HOST` - the hostname of your Yugabyte Cloud instance.
 * `USER` - the username for your instance.
 * `PASSWORD` - the database password.
@@ -64,7 +64,7 @@ name = John, age = 28, country = Canada, balance = 9800
 
 Congrats! You've successfully executed a simple Rust app that works with Yugabyte Cloud.
 
-Now, explore the source code of `sample-app.rs`:
+Now, explore the source code of `src/sample-app.rs`:
 1. `connect` function - establishes a connection with your cloud instance via the Rust PostgreSQL driver.
 3. `create_database` function - creates a table and populates it with sample data.
 4. `select_accounts` function - queries the data with SQL `SELECT` statements.
