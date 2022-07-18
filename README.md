@@ -29,7 +29,7 @@ Update the following connection parameters in the `src/sample-app.rs` file:
 * `HOST` - the hostname of your instance.
 * `USER` - the username for your instance.
 * `PASSWORD` - the database password.
-* `SSL_MODE`  - make sure it's set to `SslMode::Require`.
+* `SSL_MODE`  - make sure it's set to `SslMode::Require` for YugabyteDB Managed.
 * `SSL_ROOT_CERT` - a full path to your CA root cert (for example, `/Users/dmagda/certificates/root.crt`). 
 
 Note, you can easily find all the settings on the YugabyteDB Managed dashboard:

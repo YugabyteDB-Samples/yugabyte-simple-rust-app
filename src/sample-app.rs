@@ -5,12 +5,12 @@ use postgres_openssl::MakeTlsConnector;
 use std::error::Error;
 
 
-const HOST: &str = "";
+const HOST: &str = "127.0.0.1";
 const PORT: u16 = 5433;
 const DB_NAME: &str = "yugabyte";
-const USER: &str = "";
-const PASSWORD: &str = "";
-const SSL_MODE: SslMode = SslMode::Require;
+const USER: &str = "yugabyte";
+const PASSWORD: &str = "yugabyte";
+const SSL_MODE: SslMode = SslMode::Disable;
 const SSL_ROOT_CERT: &str = "";
 
 
@@ -33,7 +33,11 @@ fn connect() -> Result<Client, Box<dyn Error>> {
         user(USER).password(PASSWORD).ssl_mode(SSL_MODE);
 
     let mut builder = SslConnector::builder(SslMethod::tls())?;
-    builder.set_ca_file(SSL_ROOT_CERT)?;
+
+    if SSL_ROOT_CERT != "" {
+        builder.set_ca_file(SSL_ROOT_CERT)?;
+    }
+
     let connector = MakeTlsConnector::new(builder.build());
     
     let client = cfg.connect(connector)?;
@@ -92,7 +96,7 @@ fn transfer_money_between_accounts(client: &mut Client, amount: i32) -> Result<(
     if let Err(err) = exec_txn() {
         if err.code() == Some(&SqlState::T_R_SERIALIZATION_FAILURE) {
             println!("The operation is aborted due to a concurrent transaction that is modifying the same set of rows.
-                Consider adding retry logic for production-grade applications.");
+                Consider adding retry logic or using the pessimistic locking.");
         }
 
         Err(err)
